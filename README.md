@@ -9,6 +9,7 @@
   - Add subtitle
   - Add multiple version of subtitle
   - Play/view subtitle during editing with keyboards
+  - build audio ebook
 - Share
   - share the project to another students
   - public to a group of users
