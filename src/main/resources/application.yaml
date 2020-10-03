@@ -1,0 +1,39 @@
+#spring.jpa.database=POSTGRESQL
+#spring.datasource.platform=postgres
+#spring.datasource.url=jdbc:postgresql://localhost:5432/om_backend
+#spring.datasource.username=postgres
+#spring.datasource.password=admin
+#spring.jpa.show-sql=true
+#spring.jpa.generate-ddl=true
+#spring.jpa.hibernate.ddl-auto=create-drop
+#spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
+
+spring:
+    datasource:
+        platform: postgres
+        url: jdbc:postgresql://localhost:5432/om_backend
+        username: postgres
+        password: admin
+
+    jpa:
+        show-sql: true
+        generate-ddl: true
+        hibernate:
+            ddl-auto: create-drop
+        properties:
+          hibernate:
+              jdbc:
+                lob:
+                    non_contextual_creation: true
+
+    security:
+        oauth2:
+            client:
+                registration:
+                    google:
+                        clientId: 920553270974-l13a45f7fjde9ua4r3n1p9timnr4bin3.apps.googleusercontent.com
+                        clientSecret: 6_JAS0ALkqQicgwbvLuGKg-7
+#                        redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+                        scope:
+                            - email
+                            - profile
