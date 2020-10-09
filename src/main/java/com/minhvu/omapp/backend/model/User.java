@@ -1,6 +1,8 @@
 package com.minhvu.omapp.backend.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -17,13 +19,16 @@ public class User {
 
     private String googleSub;
 
+//    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+//    private List<Playlist> playlists;
+
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 
     public String getName() {
         return name;
@@ -56,4 +61,22 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
+
+//    public List<Playlist> getPlaylists() {
+//        return playlists;
+//    }
+
+//    public void setPlaylists(List<Playlist> playlists) {
+//        this.playlists = playlists;
+//    }
+//
+//    public void addPlaylist(Playlist tempPlaylist){
+//        if (playlists == null) {
+//            playlists = new ArrayList<>();
+//        }
+//
+//        playlists.add(tempPlaylist);
+//
+//        tempPlaylist.setUser(this);
+//    }
 }
