@@ -1,4 +1,4 @@
-package com.minhvu.omapp.backend.service;
+package com.minhvu.omapp.backend.config;
 
 import com.minhvu.omapp.backend.model.User;
 import com.minhvu.omapp.backend.repository.UserRepository;
