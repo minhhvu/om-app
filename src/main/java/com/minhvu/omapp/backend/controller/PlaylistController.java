@@ -1,12 +1,16 @@
 package com.minhvu.omapp.backend.controller;
 
+import com.minhvu.omapp.backend.exception.IDNotFoundException;
 import com.minhvu.omapp.backend.model.Playlist;
 import com.minhvu.omapp.backend.model.User;
 import com.minhvu.omapp.backend.repository.PlaylistRepository;
 import com.minhvu.omapp.backend.repository.UserRepository;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.IDN;
+import java.security.InvalidParameterException;
 import java.security.Principal;
 
 @RestController
@@ -25,9 +29,10 @@ public class PlaylistController {
     }
 
     @GetMapping("/{id}")
-    public Playlist getPlaylist(@PathVariable Long id){
-        System.out.println(id);
-        System.out.println(playlistRepository.findPlaylistById(id));
+    public Playlist getPlaylist(@PathVariable Long id) throws NotFoundException {
+        System.out.println("--------------------------------------------");
+        if(!playlistRepository.existsById(id))
+            throw new IDNotFoundException("Not found playlist of ID " + id.toString());
         return playlistRepository.findPlaylistById(id);
     }
 
