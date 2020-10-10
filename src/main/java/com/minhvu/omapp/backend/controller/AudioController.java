@@ -1,5 +1,6 @@
 package com.minhvu.omapp.backend.controller;
 
+import com.minhvu.omapp.backend.exception.IDNotFoundException;
 import com.minhvu.omapp.backend.model.Audio;
 import com.minhvu.omapp.backend.model.User;
 import com.minhvu.omapp.backend.repository.AudioRepository;
@@ -26,8 +27,8 @@ public class AudioController {
 
     @GetMapping("/{id}")
     public Audio getAudio(@PathVariable Long id){
-        System.out.println(id);
-        System.out.println(audioRepository.findAudioById(id));
+        if(!audioRepository.existsById(id))
+            throw new IDNotFoundException("Audio", id);
         return audioRepository.findAudioById(id);
     }
 
@@ -40,6 +41,7 @@ public class AudioController {
 
     @GetMapping("/test")
     public User test(Principal principal){
+
         User user = userRepository.findUserByGoogleSub(principal.getName());
         return user;
     }

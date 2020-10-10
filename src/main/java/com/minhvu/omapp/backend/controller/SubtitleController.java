@@ -1,6 +1,7 @@
 package com.minhvu.omapp.backend.controller;
 
 import com.minhvu.omapp.backend.domain.SubtitleDomain;
+import com.minhvu.omapp.backend.exception.IDNotFoundException;
 import com.minhvu.omapp.backend.model.Subtitle;
 import com.minhvu.omapp.backend.model.User;
 import com.minhvu.omapp.backend.repository.AudioRepository;
@@ -31,6 +32,8 @@ public class SubtitleController {
 
     @GetMapping("/{id}")
     public Subtitle getSubtitle(@PathVariable Long id){
+        if(!subtitleRepository.existsById(id))
+            throw new IDNotFoundException("Subtitle", id);
         return subtitleRepository.findSubtitleById(id);
     }
 

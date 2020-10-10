@@ -30,9 +30,8 @@ public class PlaylistController {
 
     @GetMapping("/{id}")
     public Playlist getPlaylist(@PathVariable Long id) throws NotFoundException {
-        System.out.println("--------------------------------------------");
         if(!playlistRepository.existsById(id))
-            throw new IDNotFoundException("Not found playlist of ID " + id.toString());
+            throw new IDNotFoundException("Playlist", id);
         return playlistRepository.findPlaylistById(id);
     }
 
