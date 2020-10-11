@@ -1,17 +1,10 @@
 package com.minhvu.omapp.backend.exception;
 
-import javassist.NotFoundException;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
-public class IDNotFoundException extends RuntimeException {
+public class IDNotFoundException extends ResponseStatusException {
     public IDNotFoundException(String model, Long id) {
-        super(model + " with ID of "+ id.toString() + " is not found");
-    }
-
-    public IDNotFoundException(Throwable cause) {
-        super(cause);
-    }
-
-    public IDNotFoundException(String message, Throwable cause) {
-        super(message, cause);
+        super(HttpStatus.NOT_FOUND, model + " with ID of "+ id.toString() + " is not found");
     }
 }
