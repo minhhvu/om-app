@@ -1,6 +1,9 @@
 package com.minhvu.omapp.backend.domain;
 
+import com.minhvu.omapp.backend.exception.IDNotFoundException;
 import com.minhvu.omapp.backend.model.Subtitle;
+import com.minhvu.omapp.backend.repository.AudioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class SubtitleDomain {
     private String name;

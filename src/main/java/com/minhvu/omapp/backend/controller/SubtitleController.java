@@ -2,6 +2,7 @@ package com.minhvu.omapp.backend.controller;
 
 import com.minhvu.omapp.backend.domain.SubtitleDomain;
 import com.minhvu.omapp.backend.exception.IDNotFoundException;
+import com.minhvu.omapp.backend.model.Audio;
 import com.minhvu.omapp.backend.model.Subtitle;
 import com.minhvu.omapp.backend.model.User;
 import com.minhvu.omapp.backend.repository.AudioRepository;
@@ -42,7 +43,10 @@ public class SubtitleController {
         Subtitle newSubtitle = subtitleDomain.toSubtitle();
         User currentUser = userRepository.findUserByGoogleSub(principal.getName());
         newSubtitle.setUser(currentUser);
-        newSubtitle.setAudio(audioRepository.findAudioById(subtitleDomain.getAudio_id()));
+
+        Audio audio = audioRepository.findAudioById(subtitleDomain.getAudio_id());
+        if (audio == null) throw new IDNotFoundException("playlist", subtitleDomain.getAudio_id());
+        newSubtitle.setAudio(audio);
         return subtitleRepository.save(newSubtitle);
     }
 
