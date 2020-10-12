@@ -1,9 +1,5 @@
 package com.minhvu.omapp.backend.model;
 
-import com.minhvu.omapp.backend.repository.AudioRepository;
-import com.sun.istack.NotNull;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.*;
 
 @Entity

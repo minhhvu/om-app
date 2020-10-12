@@ -24,6 +24,10 @@ public class SubtitleService {
         this.userRepository = userRepository;
     }
 
+    public Subtitle getSubtitle(Long id){
+        return subtitleRepository.findById(id).orElseThrow(() -> new IDNotFoundException("Subtitle", id));
+    }
+
     public Subtitle createSubtitle(Subtitle subtitle, User currentUser){
 
         subtitle.setUser(currentUser);
@@ -36,5 +40,28 @@ public class SubtitleService {
         subtitle.setAudio(audio);
 
         return subtitleRepository.save(subtitle);
+    }
+
+    public Subtitle updateSubtitle(Long id, Subtitle newSubtitle){
+        return subtitleRepository.findById(id)
+                .map(subtitle -> {
+                    if (newSubtitle.getName() != null) subtitle.setName(newSubtitle.getName());
+                    if (newSubtitle.getAudio() != null) subtitle.setAudio(newSubtitle.getAudio());
+                    if (newSubtitle.getSub_url() != null) subtitle.setSub_url(newSubtitle.getSub_url());
+                    System.out.println("-----------------------------------");
+                    System.out.println(subtitle.toString());
+                    return subtitleRepository.save(subtitle);
+                })
+                .orElseThrow(() -> new IDNotFoundException("Subtitle", id));
+
+    }
+
+    public void deleteSubtitle(Long id){
+        subtitleRepository.findById(id)
+                .map(sub -> {
+                    subtitleRepository.deleteById(id);
+                    return true;
+                })
+                .orElseThrow(() -> new IDNotFoundException("Subtitle", id));
     }
 }
