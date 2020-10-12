@@ -8,6 +8,8 @@ import com.minhvu.omapp.backend.model.User;
 import com.minhvu.omapp.backend.repository.AudioRepository;
 import com.minhvu.omapp.backend.repository.SubtitleRepository;
 import com.minhvu.omapp.backend.repository.UserRepository;
+import com.minhvu.omapp.backend.service.SubtitleService;
+import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +23,7 @@ public class SubtitleController {
     private SubtitleRepository subtitleRepository;
 
     @Autowired
-    private AudioRepository audioRepository;
+    private SubtitleService subtitleService;
 
     @Autowired
     private UserRepository userRepository;
@@ -39,15 +41,17 @@ public class SubtitleController {
     }
 
     @PostMapping("")
-    public Subtitle createSubtitle(@RequestBody SubtitleDomain subtitleDomain, Principal principal){
-        Subtitle newSubtitle = subtitleDomain.toSubtitle();
+    public Subtitle createSubtitle(@RequestBody Subtitle subtitle, Principal principal){
         User currentUser = userRepository.findUserByGoogleSub(principal.getName());
-        newSubtitle.setUser(currentUser);
 
-        Audio audio = audioRepository.findAudioById(subtitleDomain.getAudio_id());
-        if (audio == null) throw new IDNotFoundException("playlist", subtitleDomain.getAudio_id());
-        newSubtitle.setAudio(audio);
-        return subtitleRepository.save(newSubtitle);
+        return subtitleService.createSubtitle(subtitle, currentUser);
+    }
+
+    @PostMapping("/test")
+    public Subtitle create(@RequestBody Subtitle subtitle){
+        System.out.println(subtitle.toString());
+
+        return null;
     }
 
 }

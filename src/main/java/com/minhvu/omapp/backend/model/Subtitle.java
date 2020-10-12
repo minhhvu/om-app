@@ -1,6 +1,7 @@
 package com.minhvu.omapp.backend.model;
 
 import com.minhvu.omapp.backend.repository.AudioRepository;
+import com.sun.istack.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
@@ -24,14 +25,13 @@ public class Subtitle {
     @JoinColumn(name = "audio_id", nullable = false)
     private Audio audio;
 
-//    private Long audio_id;
-
     public Subtitle(){}
 
     public Subtitle(String name, String sub_url){
         this.name = name;
         this.sub_url = sub_url;
     }
+
 
     public Long getId() {
         return id;
@@ -67,5 +67,16 @@ public class Subtitle {
 
     public void setAudio(Audio audio) {
         this.audio = audio;
+    }
+
+    @Override
+    public String toString() {
+        return "Subtitle{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", sub_url='" + sub_url + '\'' +
+                ", user=" + user +
+                ", audio=" + audio +
+                '}';
     }
 }
