@@ -1,4 +1,5 @@
-# om-app
+# om-app (In progress)
+The app allows users to create, edit, delete and share the subtitle for their own audio/video
 
 ## App Features
 - Learn
