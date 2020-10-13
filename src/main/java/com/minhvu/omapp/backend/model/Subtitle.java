@@ -1,6 +1,8 @@
 package com.minhvu.omapp.backend.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "subtitles")
@@ -11,6 +13,7 @@ public class Subtitle {
 
     private String name;
 
+    @NotBlank(message = "sub_url is required")
     private String sub_url;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
@@ -19,6 +22,7 @@ public class Subtitle {
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "audio_id", nullable = false)
+    @NotNull(message = "audio information is required")
     private Audio audio;
 
     public Subtitle(){}

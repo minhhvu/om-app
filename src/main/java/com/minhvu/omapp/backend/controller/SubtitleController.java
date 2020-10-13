@@ -6,9 +6,17 @@ import com.minhvu.omapp.backend.repository.SubtitleRepository;
 import com.minhvu.omapp.backend.repository.UserRepository;
 import com.minhvu.omapp.backend.service.SubtitleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.MethodParameter;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/subtitle")
@@ -35,7 +43,7 @@ public class SubtitleController {
     }
 
     @PostMapping("")
-    Subtitle createSubtitle(@RequestBody Subtitle subtitle, Principal principal){
+    Subtitle createSubtitle(@Valid @RequestBody Subtitle subtitle, Principal principal){
         User currentUser = userRepository.findUserByGoogleSub(principal.getName());
 
         return subtitleService.createSubtitle(subtitle, currentUser);
