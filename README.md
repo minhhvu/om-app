@@ -29,3 +29,6 @@ The app allows users to create, edit, delete and share the subtitle for their ow
   - Java + spring
   - Postgres
   - Google Oauth
+  
+### Database Diagram
+![Database Diagram](/db_diagram.jpg)
